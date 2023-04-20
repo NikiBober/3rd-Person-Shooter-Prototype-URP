@@ -1,4 +1,5 @@
 using System.Collections;
+using Opsive.Shared.Events;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -7,11 +8,11 @@ public class EnemySpawner : MonoBehaviour
     [Tooltip("Prefab of the enemy to spawn.")]
     [SerializeField] private PooledObject _enemyPrefab;
     [Tooltip("Radius of the spawn area.")]
-    [SerializeField] private float _spawnAreaRadius = 13.0f;
+    [SerializeField] private float _spawnAreaRadius = 13f;
     [Tooltip("Initial delay between spawns.")]
-    [SerializeField] private float _initialSpawnDelay = 5.0f;
+    [SerializeField] private float _initialSpawnDelay = 5f;
     [Tooltip("Minimum delay between spawns.")]
-    [SerializeField] private float _minSpawnDelay = 1.0f;
+    [SerializeField] private float _minSpawnDelay = 1f;
     [Tooltip("Rate at which spawn delay decreases.")]
     [SerializeField] private float _spawnDelayDecreaseRate = 0.1f;
 
@@ -39,15 +40,22 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnEnemiesRoutine());
     }
 
+    // Spawn an enemy from the object pool at a random position within the spawn area.
     private IEnumerator SpawnEnemiesRoutine()
     {
         while (true)
         {
-            // Spawn an enemy from the object pool at a random position within the spawn area.
+            // Get enemy from pool.
+            var enemy = _objectPool.Get();
+
+            // Set new random position.
             Vector3 spawnPosition = Random.insideUnitSphere * _spawnAreaRadius;
             spawnPosition.y = 0;
-            var enemy = _objectPool.Get();
             enemy.gameObject.transform.position = spawnPosition;
+
+            // Reset character abilities.
+            EventHandler.ExecuteEvent(enemy.gameObject, "OnWillRespawn");
+            EventHandler.ExecuteEvent(enemy.gameObject, "OnRespawn");
 
             // Decrease the current spawn delay.
             _currentSpawnDelay -= _spawnDelayDecreaseRate;
