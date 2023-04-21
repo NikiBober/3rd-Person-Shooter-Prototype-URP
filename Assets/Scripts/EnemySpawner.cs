@@ -43,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
     // Spawn an enemy from the object pool at a random position within the spawn area.
     private IEnumerator SpawnEnemiesRoutine()
     {
-        while (true)
+        while (Player.Instance.IsPlayerAlive)
         {
             // Get enemy from pool.
             var enemy = _objectPool.Get();
@@ -53,9 +53,6 @@ public class EnemySpawner : MonoBehaviour
             spawnPosition.y = 0;
             enemy.gameObject.transform.position = spawnPosition;
 
-            // Reset character abilities.
-            EventHandler.ExecuteEvent(enemy.gameObject, "OnWillRespawn");
-            EventHandler.ExecuteEvent(enemy.gameObject, "OnRespawn");
 
             // Decrease the current spawn delay.
             _currentSpawnDelay -= _spawnDelayDecreaseRate;
@@ -87,6 +84,10 @@ public class EnemySpawner : MonoBehaviour
     private void OnGetFromPool(PooledObject pooledObject)
     {
         pooledObject.gameObject.SetActive(true);
+        // Reset character abilities.
+        EventHandler.ExecuteEvent(pooledObject.gameObject, "OnWillRespawn");
+        EventHandler.ExecuteEvent(pooledObject.gameObject, "OnRespawn");
+
     }
 
     // Invoked when we exceed the maximum number of pooled items.

@@ -23,5 +23,4 @@ public class PooledObject : MonoBehaviour
         // release object back to the pool
         _objectPool.Release(this);
     }
-
 }
