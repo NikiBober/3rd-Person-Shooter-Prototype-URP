@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private GameObject _gameOverScreen;
-    [SerializeField] private TextMeshProUGUI _gameOverText;
     [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private TextMeshProUGUI _finalScoreText;
 
     private uint _score;
 
@@ -15,11 +13,16 @@ public class GameManager : Singleton<GameManager>
     public void UpdateScore()
     {
         _score++;
-        _scoreText.SetText("You kill" + _score);
+        _scoreText.SetText(_score.ToString());
     }
 
     public void GameOver()
     {
-        Debug.Log("GameOver!");
+        _gameOverScreen.SetActive(true);
+        _scoreText.gameObject.SetActive(false);
+        _finalScoreText.SetText(_score.ToString());
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
     }
 }

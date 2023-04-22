@@ -16,6 +16,12 @@ public class EnemyMovement : Enemy
     // Enemy walks to the player`s position.
     private void Update()
     {
+        if (!_player.IsAlive)
+        {
+            _navMeshAgentMovement.Enabled = false;
+            return;
+        }
+
         _destination = _player.gameObject.transform.position;
         _navMeshAgentMovement.SetDestination(_destination);
     }

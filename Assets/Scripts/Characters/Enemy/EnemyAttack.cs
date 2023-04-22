@@ -23,6 +23,11 @@ public class EnemyAttack : Enemy
     // Attacks the target when within distance.
     private void Update()
     {
+        if (!_player.IsAlive)
+        {
+            return;
+        }
+
         // for better performance using sqrMagnitude instead of Vector3.Distance.
         var distance = (_player.transform.position - transform.position).sqrMagnitude;
 

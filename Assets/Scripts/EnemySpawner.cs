@@ -43,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
     // Spawn an enemy from the object pool at a random position within the spawn area.
     private IEnumerator SpawnEnemiesRoutine()
     {
-        while (Player.Instance.IsPlayerAlive)
+        while (Player.Instance.IsAlive)
         {
             // Get enemy from pool.
             var enemy = _objectPool.Get();
