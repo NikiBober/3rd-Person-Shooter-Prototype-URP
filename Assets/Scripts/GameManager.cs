@@ -1,6 +1,9 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Actions with UI on characthers death.
+/// </summary>
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private GameObject _gameOverScreen;
@@ -8,7 +11,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private TextMeshProUGUI _finalScoreText;
 
     private uint _score;
-
 
     public void UpdateScore()
     {
@@ -23,6 +25,5 @@ public class GameManager : Singleton<GameManager>
         _finalScoreText.SetText(_score.ToString());
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
     }
 }

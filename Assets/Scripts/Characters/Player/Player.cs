@@ -1,4 +1,6 @@
-// For static reference to player.
+/// <summary>
+/// For static reference to player.
+/// </summary>
 public class Player : Singleton<Player>
 {
     private bool _isAlive = true;

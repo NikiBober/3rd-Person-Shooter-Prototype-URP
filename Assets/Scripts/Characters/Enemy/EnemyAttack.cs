@@ -2,6 +2,9 @@ using Opsive.UltimateCharacterController.Character.Abilities.Items;
 using Opsive.UltimateCharacterController.Utility;
 using UnityEngine;
 
+/// <summary>
+/// Enemy attack player when close enough, and stop when player die.
+/// </summary>
 public class EnemyAttack : Enemy
 {
     [Tooltip("Attack if the player is within the close distance.")]
@@ -12,15 +15,13 @@ public class EnemyAttack : Enemy
     private Use _useAbility;
     private float _nextAttackTime;
 
-
-    // Initializes the default values.
     protected override void Start()
     {
         base.Start();
         _useAbility = _characterLocomotion.GetAbility<Use>();
     }
 
-    // Attacks the target when within distance.
+    // Attack the target when within distance.
     private void Update()
     {
         if (!_player.IsAlive)
@@ -28,7 +29,7 @@ public class EnemyAttack : Enemy
             return;
         }
 
-        // for better performance using sqrMagnitude instead of Vector3.Distance.
+        // For better performance used sqrMagnitude instead of Vector3.Distance.
         var distance = (_player.transform.position - transform.position).sqrMagnitude;
 
         if (distance < _attackDistance * _attackDistance && _nextAttackTime < Time.time)
@@ -36,7 +37,7 @@ public class EnemyAttack : Enemy
             Attack();
         }
     }
-
+    // Enemy use weapon from inventory.
     private void Attack()
     {
         _characterLocomotion.TryStartAbility(_useAbility);

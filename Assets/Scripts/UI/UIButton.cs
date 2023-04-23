@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Contains functions for buttons.
+/// </summary>
 public class UIButton : MonoBehaviour
 {
     [SerializeField] private GameObject _loadingScreen;

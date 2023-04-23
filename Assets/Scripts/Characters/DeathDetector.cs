@@ -1,6 +1,9 @@
 using Opsive.Shared.Events;
 using UnityEngine;
 
+/// <summary>
+/// Parent class to register death.
+/// </summary>
 public abstract class DeathDetector : MonoBehaviour
 {
     protected void Awake()
@@ -9,5 +12,4 @@ public abstract class DeathDetector : MonoBehaviour
     }
 
     protected abstract void OnDeath(Vector3 position, Vector3 force, GameObject attacker);
-    
 }
