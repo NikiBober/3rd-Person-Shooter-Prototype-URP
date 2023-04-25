@@ -4314,13 +4314,15 @@ MonoBehaviour:
     m_Bits: 0
   m_TakeDamageAudioClipSet:
     m_AudioConfig: {fileID: 0}
-    m_AudioClips: []
+    m_AudioClips:
+    - {fileID: 8300000, guid: a1c656d9dcbd1444fbfd889adaf695ac, type: 3}
   m_HealAudioClipSet:
     m_AudioConfig: {fileID: 0}
     m_AudioClips: []
   m_DeathAudioClipSet:
     m_AudioConfig: {fileID: 0}
-    m_AudioClips: []
+    m_AudioClips:
+    - {fileID: 8300000, guid: 13c79f33e0a474facae13f714925a342, type: 3}
   m_DamagePopupManagerID: -1
   m_OnDamageEvent:
     m_PersistentCalls:
@@ -28795,7 +28797,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -110, y: -29.99997}
+  m_AnchoredPosition: {x: -110, y: -30}
   m_SizeDelta: {x: 200, y: 80}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1266491401
